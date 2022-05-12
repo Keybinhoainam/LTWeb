@@ -1,0 +1,18 @@
+
+#div1{
+    
+    width: 1520px;
+    height: 730px;
+    background-image: url("https://thietbiketnoi.com/wp-content/uploads/2020/01/tong-hop-hinh-nen-background-vector-designer-dep-do-phan-giai-fhd-2k-4k-moi-nhat-2.jpg");
+ 
+    background-size: auto;
+}
+#div2{
+    background-color: white;
+    width: 350px;
+    height: 500px;
+    margin-left: 600px;
+    /* margin-top: 100px; */
+    /* border-top: 100px; */
+    /* padding-top: 100px; */
+}

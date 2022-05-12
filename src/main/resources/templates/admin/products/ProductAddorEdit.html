@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>BHN Store</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+</head>
+  <body>
+    <main class="container">
+      <header class="row text-center ">
+        <div class="col">
+            <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+                <a class="navbar-brand" href="#">BHN Store</a>
+                <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse d-flex justify-content-center" id="collapsibleNavId">
+                  <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                      <li class="nav-item ">
+                          <a class="nav-link" th:href="@{/admin/categories/list}">Category</a>
+                      </li>
+                      <li class="nav-item active">
+                          <a class="nav-link" th:href="@{/admin/products/list}" >Product</a>
+                      </li>
+                      <li class="nav-item">
+                                <a class="nav-link" th:href="@{/admin/order}" >Order History</a>
+                            </li>
+                      
+                      
+                      
+                  </ul>
+                  
+              </div>
+            </nav>
+        </div>
+    </header>
+        <section class="row">
+            <div class="col mt-4 ">
+            <form th:action="@{/admin/products/saveOrUpdate}" method="post" th:object="${product}" enctype="multipart/form-data"> 
+              <div class="card">
+                <div class="card-header">
+                  <h1 th:if="${!product.isEdit}">Add New Product</h1>
+                  <h1 th:if="${product.isEdit}">Edit Product</h1>
+                </div>
+                <div class="card-body">
+                  
+                    <div class="row" >
+                      <div class="col-7">
+                        <div class="form-group was-validated">
+                          <label for="productid">Product ID:</label>
+                          <input type="text" class="form-control" th:field="*{productId}" id="productid"  placeholder="Product ID" readonly>
+                          <div class="invalid-feedback">Không để trống</div>
+                        </div> 
+                        <div class="form-group was-validated">
+                          <label for="name">Name:</label>
+                          <input type="text" class="form-control" th:field="*{name}" id="name"  placeholder="Name" required>
+                          <div class="invalid-feedback">Không để trống</div>
+                        </div> 
+                        <div class="form-group was-validated">
+                          <label for="quantity">Quantity:</label>
+                          <input type="text" class="form-control" th:field="*{quantity}" id="quantity"  placeholder="Quantity" required>
+                          <div class="invalid-feedback">Không để trống</div>
+                        </div> 
+                        <div class="input-group form-group was-validated">
+                          <span class="input-group-text">Unit Price</span>
+                          <input type="number" th:field="*{unitPrice}" id="unitprice" class="form-control" placeholder="Unit Price" required>
+                          <span class="input-group-text">$</span>
+                        </div>
+                        
+                        <div class="form-group">
+                          <label for="category">Catgory:</label>
+                          <select class="form-control" name="categoryId" id="category">
+                            <option th:each=" category: ${categories }" th:value="${category.categoryId}" th:text="${category.name}" th:selected="${category.categoryId}==${product.categoryId}"></option>
+                          
+                          </select>
+                        </div>
+                        
+                      </div>
+                      <div class="col-4">
+                        <script>
+                          function chooseFile(fileInput){
+                            if(fileInput.files && fileInput.files[0]){
+                              var reader =new FileReader();
+                              reader.onload=function (e){
+                                $('#image').attr('src',e.target.result);
+
+                              }
+                              reader.readAsDataURL(fileInput.files[0]);
+                            }
+                          }
+                        </script>
+                        <img id="image" th:src="${product.image!=null ? '/admin/products/images/'+product.image : 'images/noimage.jpg'}" style="min-height: 180px;max-height: 180px;"
+                          alt="Product Image">
+                        <input type="hidden" th:field="*{image}">
+                        <div class="form-group">
+                          <label for="imagefile">Image File</label>
+                          <input type="file" onchange="chooseFile(this)" class="form-control-file" th:field="*{imageFile}" id="imagefile" placeholder="Image File" aria-describedby="fileHelpId">
+                          <small id="fileHelpId" class="form-text text-muted">Image product is required</small>
+                        </div>
+                        
+                        <div class="input-group form-group was-validated">
+                          <span class="input-group-text">Discount</span>
+                          <input type="number" th:field="*{discount}" id="discount" class="form-control" placeholder="Discount" required>
+                          <span class="input-group-text">%</span>
+                        </div>
+                        <div class="form-group">
+                          <label for="status">Status</label>
+                          <select class="form-control" th:field="*{status}" name="status" id="status">
+                            <option value="promotion">promotion</option>
+                            <option value="discount">discount</option>
+                            <option value="new">New</option>
+                            <option value="coming soon">Coming soon</option>
+                          </select>
+                        </div> 
+                      </div>
+                      </div>
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                          <label for="description" >Decription</label>
+                          <textarea class="form-control" th:field="*{descrition}" name="description" id="description" rows="5"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="show">Show</label>
+                      <select class="form-control" th:field="*{isshow}" id="isshow">
+                        <option value="true">true</option>
+                        <option value="false">false</option>
+                      </select>
+                    </div>
+                  
+                </div>
+              
+                <div class="card-footer text-muted">
+                  
+                  <button class="btn btn-primary"><i class="fas fa-save  "></i>
+                    <span th:if="*{isEdit}">Update</span>
+                    <span th:unless="*{isEdit}">Save</span>
+                </button>
+                </div>
+              </div>
+            </form>
+            </div>
+        </section>
+        <footer></footer>
+    </main>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
