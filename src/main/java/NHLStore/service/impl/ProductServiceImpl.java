@@ -31,6 +31,15 @@ public class ProductServiceImpl implements ProductService{
 		return productreposity.findByNameContaining(name);
 	}
 
+	
+
+	@Override
+	public List<Product> findByCondi(Long x, String y) {
+		return productreposity.findByCondi(x, y);
+	}
+
+
+
 	@Override
 	public List<Product> findProductInStock() {
 		return productreposity.findProductInStock();

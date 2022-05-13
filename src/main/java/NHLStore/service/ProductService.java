@@ -80,6 +80,8 @@ public interface ProductService {
 
 	List<Product> findByNameContaining(String name);
 
+	List<Product> findByCondi(Long x, String y);
+
 	
 	
 

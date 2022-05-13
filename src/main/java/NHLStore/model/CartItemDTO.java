@@ -1,7 +1,5 @@
 package NHLStore.model;
 
-
-
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -18,12 +16,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Account implements Serializable{
-	
+
+public class CartItemDTO implements Serializable{
 	private Long id;
-	private String username;
-	private String passwword;
-	private String phone;
-	private String email;
-	private boolean isadmin;
+	private Long userId;
+	private Long productId;
+	private int quantity;
+	private Long cartId;
+	private int isActive;
+	private double amount;
 }

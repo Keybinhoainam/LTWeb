@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>BHN Store</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+</head>
+  <body>
+    <main class="container">
+      <header class="row text-center ">
+        <div class="col">
+          <nav class="navbar  navbar-dark bg-dark">
+            <a class="navbar-brand" th:href="@{/home}">NHL Store</a>
+            
+        </nav>
+        </div>
+    </header>
+        <section class="row">
+            <div class="col mt-4 ">
+            <form th:action="@{/admin/products/saveOrUpdate}" method="post" th:object="${product}" enctype="multipart/form-data"> 
+              <div class="card">
+                <div class="card-header">
+                  <h1 >Product Infor</h1>
+                </div>
+                <div class="card-body">
+                  
+                    <div class="row" >
+                      <div class="col-7">
+                        <img id="image" th:src="${product.image!=null ? '/admin/products/images/'+product.image : 'images/noimage.jpg'}" style="min-height: 180px;max-height: 180px;"
+                          alt="Product Image">
+                        
+                        
+                      </div>
+                      <div class="col-4">
+                        <!-- <input th:field="${accountid}" hidden> -->
+                        <div class="form-group was-validated">
+                          <b for="name">Name: </b>
+                          <span th:text="*{name}"></span>
+                          <br>
+                        </div> 
+                    
+                        <div class="input-group form-group was-validated">
+
+                          <b >Unit Price: </b>
+                          <span th:text="*{unitPrice}"></span>
+                          
+                          <span >$</span>
+                          <br>
+                        </div>
+                        
+                        <div class="form-group">
+                          <b for="category">Catgory: </b>
+                          <span th:text="${categoryname}"></span>
+                          <br>
+                        </div>
+                        
+                        <div class="input-group form-group ">
+                          <b >Discount:  </b>
+                          <span th:text="*{discount}"></span>
+                          
+                          <span >%</span>
+                          <br>
+                        </div>
+                        <div class="form-group">
+                          <b for="status">Status:  </b>
+                          <span th:text="*{status}"></span>
+                          <br>
+                        </div> 
+                      </div>
+                      </div>
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                          <b for="description" >Decription</b>
+                          <textarea class="form-control" th:text="*{descrition}" readonly></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  
+                </div>
+              
+                <div class="card-footer text-muted">
+                  <a th:href="@{'/home' }" class="btn btn-outline-secondary mr-4" ><i class="">Continues Shopping</i></a>
+                  <a th:href="@{'/cart/addtocart/' + *{productId}}" class="btn btn-outline-primary"><i class="fas fa-cart-plus">Add to Cart</i></a>
+                  
+                  
+                </div>
+              </div>
+            </form>
+            </div>
+        </section>
+        <footer></footer>
+    </main>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

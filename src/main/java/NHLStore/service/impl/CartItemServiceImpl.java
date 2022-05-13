@@ -10,11 +10,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
+import org.springframework.stereotype.Service;
 
 import NHLStore.domain.CartItem;
 import NHLStore.reponsitory.CartItemResponsitory;
 import NHLStore.service.CartItemService;
-
+@Service
 public class CartItemServiceImpl implements CartItemService{
 	@Autowired
 	CartItemResponsitory cartItemResponsitory;
@@ -24,9 +25,23 @@ public class CartItemServiceImpl implements CartItemService{
 		this.cartItemResponsitory = cartItemResponsitory;
 	}
 
+	
+
+	@Override
+	public void DeleteCartItem(Long id) {
+		cartItemResponsitory.DeleteCartItem(id);
+	}
+
+
+
 	@Override
 	public <S extends CartItem> S save(S entity) {
 		return cartItemResponsitory.save(entity);
+	}
+
+	@Override
+	public List<CartItem> findCartItem(Long id) {
+		return cartItemResponsitory.findCartItem(id);
 	}
 
 	@Override

@@ -15,5 +15,7 @@ public interface ProductReposity extends JpaRepository<Product, Long>{
 	List<Product> findProductInStock();
 	@Query("select p from Product p where p.quantity <= 0")
 	List<Product> findProductOutStock();
+	@Query("select p from Product p where p.category.id=?1 and  p.status=?2")
+	List<Product> findByCondi(Long x, String y);
 
 }

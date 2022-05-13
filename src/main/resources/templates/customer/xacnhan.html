@@ -17,68 +17,62 @@
         <div class="menu">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid p-3 mb-2 bg-info text-dark">
-                  <a class="navbar-brand" href="#">NHL store</a>
+                 
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                       <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="navbar-brand" th:href="@{/home}">NHL Store</a>
+                
                       </li>
                       <!-- <li class="nav-item">
                         <a class="nav-link" href="#">Đăng nhập</a>
                       </li> -->
                       
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Tài khoản
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Tài khoản của tôi</a></li>
-                            <li><a class="dropdown-item" href="#">Đơn mua</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="../templates/home.html">Đăng xuất</a></li>
-                            </ul>
-                        </li>
+                        
                       <!-- <li class="nav-item">
                         <a class="nav-link disabled">Disabled</a>
                       </li> -->
                     </ul>
-                    <form class="d-flex">
-                      <input class="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Tìm kiếm">
-                      <button class="btn btn-outline-success" type="submit">Tìm kiếm</button>
-                    </form>
+                    
                   </div>
                 </div>
               </nav>
         </div>
         <div class="xacnhan">
-            <div class="form-group mb-3">
-              <label for="">Họ và tên:</label>
-              <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
-              <small id="helpId" class="form-text text-muted">Help text</small>
-            </div>
-            <div class="form-group">
-                <label for="">Địa chỉ:</label>
-                <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
-                <small id="helpId" class="form-text text-muted">Help text</small>
-            </div>
-            <div class="form-group">
-                <label for="">Số điện thoại:</label>
-                <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
-                <small id="helpId" class="form-text text-muted">Help text</small>
-            </div>
-            <div>
-                <p>Phuong thuc thanh toan: <br/>
-                    <input type="radio" name="thanhtoan" checked="checked"/> Thanh toan khi nhan hang <br/>
-                    <input type="radio" name="thanhtoan"/> Thanh toan truc tuyen
-                </p><br>
-                <!-- </center> -->
-            
-                <a href="../templates/giohang.html"><button class="btn btn-lg btn-primary btn-block ">Quay lai </button></a>
-                <button class="btn btn-lg btn-primary btn-block">Xac nhan</button>
-            </div>
+          <!-- <input th:field="${accountid}" hidden> -->
+            <form th:action="@{checkout/save}" method="post" th:object="${order}">
+              <div class="form-group mb-3">
+                <label for="">Họ và tên:</label>
+                <input type="text" class="form-control" th:field="*{name}" aria-describedby="helpId" placeholder="" required>
+                <small id="helpId" class="form-text text-muted">Field is required</small>
+              </div>
+              <div class="form-group">
+                  <label for="">Địa chỉ:</label>
+                  <input type="text" class="form-control" th:field="*{adress}" aria-describedby="helpId" placeholder="">
+                  <small id="helpId" class="form-text text-muted">Help text</small>
+              </div>
+              <div class="form-group">
+                  <label for="">Số điện thoại:</label>
+                  <input type="text" class="form-control" th:field="*{phone}" aria-describedby="helpId" placeholder="">
+                  <small id="helpId" class="form-text text-muted">Help text</small>
+              </div>
+              <div>
+                  <label for="pt">Phuong thuc thanh toan:</label>
+                    <select class="form-control" th:field="*{phuongthuc}" id="pt">
+                      <option  th:value="Online"  >Qua the ngan hang</option>
+                      <option  th:value="Offline"  >Tra khi nhan hang</option>
+                    
+                    </select>
+                  </label><br>
+                  <!-- </center> -->
+              
+                  <a th:href="@{/home}"><button class="btn btn-lg btn-secondary btn-block ">Continue Shopping </button></a>
+                  <button class="btn btn-lg btn-primary btn-block">Confirm</button>
+              </div>
+            </form>
         </div>
     </div>
 

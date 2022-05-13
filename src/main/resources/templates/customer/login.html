@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns="http://www.thymeleaf.org">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -13,31 +13,33 @@
   <body>
     <div id="div1">
         <div class="text-center" id="div2">
-            <form style="max-width:350px;margin:auto;" >
-                
-                <img class="mt-4 mb-4" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStkwnE10-B_rcvS1xYzHjtr77gvc_cI4X49JPAmNIsYzou3jPjlSUshK4EQxsU_-HtP0c&usqp=CAU" height="72">
+          <b th:if="${message} " th:text="${message}"></b>
+            <form th:action="@{/login}" method="post" style="max-width:350px;margin:auto;" >
+                <a href="/home">
+                    <img class="mt-4 mb-4" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStkwnE10-B_rcvS1xYzHjtr77gvc_cI4X49JPAmNIsYzou3jPjlSUshK4EQxsU_-HtP0c&usqp=CAU" height="72">
+                </a>
                 <h1 class="h3 mb-3 font-weight-normal">Đăng nhập</h1>
                 <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="username" th:field="${account.username}">
                     <label for="floatingInput">Tài khoản</label>
                 </div>
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" th:field="${account.password}">
                     <label for="floatingPassword">Mật khẩu</label>
                 </div>
-                <div class="checckbox">
-                    <label>
-                        <input type="checkbox"
-                        value="Lưu mật khẩu"> Lưu mật khẩu
-                    </label>
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" th:field="${account.remenberMe}" value="false">
+                      Nhớ mật khẩu
+                  </label>
                 </div>
                 <div class="mt-3 mb-3">
-                    <button class="btn btn-lg btn-primary btn-block">Đăng nhập</button>
+                    <button class="btn btn-lg btn-primary btn-block"><f5-sign-in-all mr-1>Đăng nhập</f5-sign-in-all></button>
                 </div>
                 <!-- <a href="../templates/dangky.html " >Đăng ký</a> -->
                 <div>
                     
-                    <a href="../templates/dangky.html" class="btn btn-lg btn-primary btn-block">Đăng ký</a>
+                    <a th:href="@{/dangky}" class="btn btn-lg btn-primary btn-block">Đăng ký</a>
                 </div>
             </form>
             

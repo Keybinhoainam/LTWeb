@@ -74,6 +74,12 @@ public interface CartItemService {
 
 	<S extends CartItem> S save(S entity);
 
+	List<CartItem> findCartItem(Long id);
+
+	void DeleteCartItem(Long id);
+
+	
+
 	
 
 }
