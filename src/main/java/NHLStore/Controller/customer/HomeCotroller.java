@@ -2,6 +2,8 @@ package NHLStore.Controller.customer;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +29,8 @@ public class HomeCotroller {
 	CategoryService categoryService;
 	@Autowired
 	CartItemService cartItemService;
+	@Autowired
+    private HttpSession session;
 	@RequestMapping("")
 	public String home(Model model ) {
 //		System.out.println("ok");
@@ -38,6 +42,8 @@ public class HomeCotroller {
 		model.addAttribute("products",listp);
 		model.addAttribute("categories",listc);
 		model.addAttribute("cartitems",listci);
+		Long accountid=(Long) session.getAttribute("accountid");
+		model.addAttribute("accountid", accountid);
 		return "customer/HomeN";
 	}
 	@RequestMapping("loc")
@@ -46,13 +52,15 @@ public class HomeCotroller {
 		
 		
 		List<Product> listproductselect=productService.findByCondi(categoryselect,statusselect);
-		List<Product> listp=productService.findAll();
+//		List<Product> listp=productService.findAll();
 		List<Category> listc=categoryService.findAll();
 		List<CartItem> listci=cartItemService.findAll();
-		model.addAttribute("products",listp);
+		model.addAttribute("products",listproductselect);
 		model.addAttribute("categories",listc);
 		model.addAttribute("cartitems",listci);
 		model.addAttribute("productselect",listproductselect);
+		Long accountid=(Long) session.getAttribute("accountid");
+		model.addAttribute("accountid", accountid);
 		return "customer/HomeN";
 	}
 }

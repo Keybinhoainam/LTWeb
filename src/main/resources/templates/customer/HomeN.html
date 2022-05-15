@@ -81,7 +81,7 @@
                       </thead>
                       <tbody>
                         <!-- <input th:field="${accountid}" hidden> -->
-                        <tr th:each=" product: ${products}" th:object="${product}" th:if="${product.isshow and product.quantity>0 and productselect==nul}">
+                        <tr th:each=" product: ${products}" th:object="${product}" th:if="${product.isshow and product.quantity}">
                           
                           <td th:text="*{name}"></td>
                           <td th:text="*{quantity}"></td>
@@ -96,7 +96,7 @@
 
                           </td>
                         </tr>
-                        <tr th:each=" product: ${productselect}" th:object="${product}" th:if="${product.isshow and product.quantity>0 and productselect!=nul}">
+                        <!-- <tr th:each=" product: ${productselect}" th:object="${product}" th:if="${product.isshow and product.quantity>0 and productselect.isEmpty}">
                         
                           
                           <td th:text="*{name}"></td>
@@ -108,10 +108,10 @@
                           <td>
                             <a th:href="@{'/products/infor/'+ *{productId} }" class="btn btn-outline-info"><i class="fas fa-info"></i></a>
                             <a th:href="@{'/cart/addtocart/' + *{productId}}" class="btn btn-outline-warning" ><i class="fas fa-cart-plus"></i></a>
-                            <!-- <a th:href="@{'/admin/products/delete/'+ *{productId} }" class="btn btn-outline-success"><i class="fas fa-shopping-bag"></i></a> -->
+                            
 
                           </td>
-                        </tr>
+                        </tr> -->
                         
                       </tbody>
                   </table>

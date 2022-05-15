@@ -17,10 +17,10 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+//
+//@Data
+//@AllArgsConstructor
+//@NoArgsConstructor
 @Entity
 @Table(name="orderdetails")
 public class OrderDetail implements Serializable{
@@ -37,4 +37,38 @@ public class OrderDetail implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="productId")
 	private Product product;
+	public OrderDetail() {
+		super();
+	}
+	public Long getOrderDatailId() {
+		return orderDatailId;
+	}
+	public void setOrderDatailId(Long orderDatailId) {
+		this.orderDatailId = orderDatailId;
+	}
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	public double getUnitprice() {
+		return unitprice;
+	}
+	public void setUnitprice(double unitprice) {
+		this.unitprice = unitprice;
+	}
+	public Order getOrder() {
+		return order;
+	}
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+	public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	
 }
