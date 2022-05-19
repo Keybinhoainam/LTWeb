@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
@@ -34,13 +35,13 @@
                   </div>
                   <div class="row mt-2 mb-2">
                     <div class="col pb-3">
-                      <form th:action="@{/checkout}">
+                      <form th:action="@{/customer/cart/checkout}">
                         <div class=" form-inline ">
                           <b for="amount" class="mr-2 float-left">Amount:</b>
                           <i id="amount" th:text="${amount} + ' $'" class="mr-4 float-left"></i>
                           <button type="button submit" class="btn btn-primary" th:if="${cartitems.size>0}">Checkout</button>
                           
-                          <a th:href="@{'/home' }" class="btn btn-outline-secondary float-right ml-4" ><i class="">Continues Shopping</i></a>
+                          <a th:href="@{'/customer/home' }" class="btn btn-outline-secondary float-right ml-4" ><i class="">Continues Shopping</i></a>
                         </div>
                         
                       </form>
@@ -64,8 +65,8 @@
                           <td th:text="*{quantity}"></td>
                           
                           <td>
-                            <a th:href="@{'/cart/addtocart/' + *{product.productId}}" class="btn btn-outline-primary" th:if="${cartitem.quantity < cartitem.product.quantity}"><i class="fas fa-plus"></i></a>
-                            <a th:href="@{'/cart/delete/'+ *{id} }" class="btn btn-outline-danger"><i class="fas fa-recycle"></i></a>
+                            <a th:href="@{'/customer/cart/addtocart/' + *{product.productId}}" class="btn btn-outline-primary" th:if="${cartitem.quantity < cartitem.product.quantity}"><i class="fas fa-plus"></i></a>
+                            <a th:href="@{'/customer/cart/delete/'+ *{id} }" class="btn btn-outline-danger"><i class="fas fa-recycle"></i></a>
                             
                             <!-- <a th:href="@{'/admin/products/delete/'+ *{productId} }" class="btn btn-outline-success"><i class="fas fa-shopping-bag"></i></a> -->
 

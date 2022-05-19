@@ -7,9 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+    <link href="/css/bootstrap2.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/css/font-awesome.css" rel="stylesheet">
 </head>
   <body>
     <main class="container">
@@ -106,8 +105,8 @@
                             }
                           </script> -->
                           <td>
-                            <i th:if="${product.isshow==true}" class="fas fa-eye" id="show"></i>
-                            <i th:unless="${product.isshow==true}" class="fas fa-eye-slash"  id="show"></i>
+                            <i th:if="${product.isshow==true}" class="fa fa-eye" id="show"></i>
+                            <i th:unless="${product.isshow==true}" class="fa fa-eye-slash"  id="show"></i>
                             
                           </td>
                           <!-- <td th:text="*{productId}"></td> -->
@@ -118,9 +117,9 @@
                           <td th:text="*{status}"></td>
                           <td  th:text="*{category.name}"></td>
                           <td>
-                            <a th:href="@{'/admin/products/edit/'+ *{productId} }" class="btn btn-outline-info"><i class="fas fa-info"></i></a>
-                            <a th:href="@{'/admin/products/edit/'+ *{productId} }" class="btn btn-outline-warning"><i class="fas fa-edit"></i></a>
-                            <a th:href="@{'/admin/products/delete/'+ *{productId} }" class="btn btn-outline-danger"><i class="fas fa-recycle"></i></a>
+                            
+                            <a th:href="@{'/admin/products/edit/'+ *{productId} }" class="btn btn-outline-warning"><i class="fa fa-edit"></i></a>
+                            <a th:href="@{'/admin/products/delete/'+ *{productId} }" class="btn btn-outline-danger"><i class="fa fa-recycle"></i></a>
 
                           </td>
                         </tr>

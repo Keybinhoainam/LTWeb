@@ -27,11 +27,103 @@ public class ProductServiceImpl implements ProductService{
 	
 
 	@Override
+	public List<Product> findByFilter1(String name, String status) {
+		return productreposity.findByFilter1(name, status);
+	}
+
+
+
+
+
+
+
+	@Override
+	public List<Product> findByFilter2(String name, Long category) {
+		return productreposity.findByFilter2(name, category);
+	}
+
+
+
+
+
+
+
+	@Override
 	public List<Product> findByNameContaining(String name) {
 		return productreposity.findByNameContaining(name);
 	}
 
 	
+
+	
+
+
+
+	@Override
+	public List<Product> findByDiscount() {
+		return productreposity.findByDiscount();
+	}
+
+
+
+
+
+
+
+	@Override
+	public List<Product> findByFilter(String name, Long category, String status) {
+		return productreposity.findByFilter(name, category, status);
+	}
+
+
+
+
+
+
+
+	@Override
+	public List<Product> findByCategory(Long id) {
+		return productreposity.findByCategory(id);
+	}
+
+
+
+
+
+
+
+	@Override
+	public List<Product> findTop3Nuts() {
+		return productreposity.findTop3Nuts();
+	}
+
+
+
+
+
+
+
+	@Override
+	public List<Product> findTop3Oils() {
+		return productreposity.findTop3Oils();
+	}
+
+
+
+
+
+
+
+	@Override
+	public List<Product> findTop3PastaNoodles() {
+		return productreposity.findTop3PastaNoodles();
+	}
+
+
+
+
+
+
 
 	@Override
 	public List<Product> findByCondi(Long x, String y) {

@@ -35,7 +35,7 @@ public class Order implements Serializable{
 	@Column(nullable = false)
 	private double amount;
 	@Column(nullable = true)
-	private String status;
+	private String note;
 	@Column(nullable = false)
 	private String adress;
 	@Column(nullable = true)
@@ -68,11 +68,12 @@ public class Order implements Serializable{
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
-	public String getStatus() {
-		return status;
+	
+	public String getNote() {
+		return note;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setNote(String note) {
+		this.note = note;
 	}
 	public String getAdress() {
 		return adress;

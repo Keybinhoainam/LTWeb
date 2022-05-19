@@ -22,7 +22,7 @@ import NHLStore.domain.Product;
 import NHLStore.service.CartItemService;
 import NHLStore.service.ProductService;
 @Controller
-@RequestMapping("/cart")
+@RequestMapping("/customer/cart")
 public class CartController implements Serializable{
 	@Autowired
 	CartItemService cartItemService;
@@ -50,12 +50,48 @@ public class CartController implements Serializable{
 		}
 		model.addAttribute("amount", amount);
 		model.addAttribute("cartitems",list);
-		return "customer/Cart";
+		return "customer2/Cart";
 		
 		
 	}
 	@RequestMapping("addtocart/{id}")
 	public ModelAndView addtocart(ModelMap model,@PathVariable("id") Long id) {
+		
+		Long accountId=(Long) session.getAttribute("accountid");
+		System.out.println(accountId);
+		if(accountId==null) {
+			return new ModelAndView("forward:/login",model);
+		}
+		System.out.println("ok");
+		CartItem cartitem=new CartItem();
+		Product p=productService.getById(id);
+		cartitem.setProduct(p);
+		Account acc=new Account();
+		acc.setId(accountId);
+		cartitem.setAccount(acc);
+		
+		if(p.getQuantity()<=0) {
+			model.addAttribute("message", "Product is Empty");
+			return new ModelAndView("forward:/customer/cart",model);
+		}
+		
+		int quantity=0;
+		
+		List<CartItem> list=cartItemService.findCartItem(accountId);
+		
+		for(CartItem c: list) {
+			if(c.getProduct().getProductId()==id) {
+				quantity=c.getQuantity();
+				cartitem.setId(c.getId());
+			}
+		}
+		cartitem.setQuantity(quantity+1);
+		
+		cartItemService.save(cartitem);
+		return new ModelAndView("forward:/customer/cart",model);
+	}
+	@RequestMapping("minus1/{id}")
+	public ModelAndView minus1(ModelMap model,@PathVariable("id") Long id) {
 		
 		Long accountId=(Long) session.getAttribute("accountid");
 		System.out.println(accountId);
@@ -80,10 +116,11 @@ public class CartController implements Serializable{
 				cartitem.setId(c.getId());
 			}
 		}
-		cartitem.setQuantity(quantity+1);
+		if(quantity>1) cartitem.setQuantity(quantity-1);
+		else cartitem.setQuantity(quantity);
 		
 		cartItemService.save(cartitem);
-		return new ModelAndView("forward:/cart",model);
+		return new ModelAndView("forward:/customer/cart",model);
 	}
 	@GetMapping("delete/{id}")
 	public String delete(Model model, @PathVariable("id") Long productId) {
@@ -92,9 +129,9 @@ public class CartController implements Serializable{
 		if(opt.isPresent()) {
 			cartItemService.deleteById(productId);
 			model.addAttribute("mes", "Product is Deleted");
-			return "forward:/cart";
+			return "forward:/customer/cart";
 		}
 		model.addAttribute("mes", "Product is Empty");
-		return "forward:/cart";
+		return "forward:/customer/cart";
 	}
 }

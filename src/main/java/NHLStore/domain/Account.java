@@ -30,7 +30,7 @@ public class Account implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(length=30)
+	@Column(length=30,unique = true, nullable=false)
 	private String username;
 	@Column(length=30, nullable=false)
 	private String password;
@@ -39,7 +39,7 @@ public class Account implements Serializable{
 	@Column(length=30)
 	private String email;
 	@Column(columnDefinition = "bit not null")
-	private boolean isadmin;
+	private boolean isadmin=false;
 	
 	@OneToMany(mappedBy = "account",cascade =CascadeType.ALL)
 	private Set<Order> orders;

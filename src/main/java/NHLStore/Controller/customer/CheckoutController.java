@@ -8,10 +8,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import NHLStore.domain.Account;
 import NHLStore.domain.CartItem;
@@ -24,7 +26,7 @@ import NHLStore.service.OrderService;
 import NHLStore.service.ProductService;
 
 @Controller
-@RequestMapping("/checkout")
+@RequestMapping("/customer/cart/checkout")
 public class CheckoutController {
 	@Autowired
 	OrderService orderService;
@@ -45,7 +47,7 @@ public class CheckoutController {
 		Order o=new Order();
 		
 		model.addAttribute("order",o);
-		return "customer/xacnhan";
+		return "customer2/checkout";
 	}
 	@PostMapping("save")
 	public String save (Model model,@ModelAttribute("order") Order order) {
@@ -76,6 +78,10 @@ public class CheckoutController {
 			cartItemService.delete(ci);
 		}
 		model.addAttribute("mes","Order is Saved");
-		return "forward:/home";
+		return "forward:/customer/home";
+	}
+	@RequestMapping("payment")
+	public ModelAndView checkout(ModelMap model) {
+		return new ModelAndView("customer2/payment",model);
 	}
 }

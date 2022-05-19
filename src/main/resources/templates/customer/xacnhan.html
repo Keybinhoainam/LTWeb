@@ -43,7 +43,7 @@
         </div>
         <div class="xacnhan">
           <!-- <input th:field="${accountid}" hidden> -->
-            <form th:action="@{checkout/save}" method="post" th:object="${order}">
+            <form th:action="@{/customer/cart/checkout/save}" method="post" th:object="${order}">
               <div class="form-group mb-3">
                 <label for="">Họ và tên:</label>
                 <input type="text" class="form-control" th:field="*{name}" aria-describedby="helpId" placeholder="" required>
@@ -69,7 +69,7 @@
                   </label><br>
                   <!-- </center> -->
               
-                  <a th:href="@{/home}"><button class="btn btn-lg btn-secondary btn-block ">Continue Shopping </button></a>
+                  <a th:href="@{/customer/home}"><button class="btn btn-lg btn-secondary btn-block ">Continue Shopping </button></a>
                   <button class="btn btn-lg btn-primary btn-block">Confirm</button>
               </div>
             </form>

@@ -1,4 +1,4 @@
-package NHLStore.Controller.customer;
+package NHLStore.Controller;
 
 
 import java.util.Optional;
@@ -48,33 +48,32 @@ public class AccountController {
     { 
         if(result.hasErrors())
         {
+        	model.addAttribute("message", "Login Failed");
             return new ModelAndView("forward:/login", model);
         }
-        
-        System.out.println(dto.getUsername()+" "+dto.getPassword());
         Optional<Account> optExist=accountService.findByUserName(dto.getUsername());
-        // Account account = accountService.login(dto.getUsername(),dto.getPassword());
-        System.out.println(optExist.isPresent());
         if(optExist.isPresent() && dto.getPassword().equals(optExist.get().getPassword()))
         {
-			System.out.println("password "+optExist.get().getPassword());
-           
-            session.setAttribute("accountid", optExist.get().getId());
-//            System.out.println(session.getAttribute("id"));
-            // return new ModelAndView("forward:/",model);
+        	session.setAttribute("accountid", optExist.get().getId());
+        	session.setAttribute("isadmin", optExist.get().isIsadmin());
             model.addAttribute("accountid",optExist.get().getId());
-            return new ModelAndView("forward:/home",model);
-            // session.setAttribute("username", dto.account.getUsername());
+            session.setAttribute("username", dto.getUsername());
+            Object ruri=session.getAttribute("redirect-uri");
+        	if(ruri !=null && ruri!="/login") {
+        		session.removeAttribute("redirect-uri");
+        		return new ModelAndView("redirect:"+ruri);
+        	}
+        	if(!optExist.get().isIsadmin()) {
+        		
+	            return new ModelAndView("redirect:/customer/home",model);
+        	}
+        	else {
+        		return new ModelAndView("redirect:/admin/products/list",model);
+        	}
+	       
             
         }
-        // model.addAttribute("message","Invalid username or password");
-        // optExist.get().setPassword("");
-        System.out.println("no");
-        Account acc= new Account();
-        acc=optExist.get();
-        AccountDTO acd=new AccountDTO();
-        BeanUtils.copyProperties(acc, acd);
-        model.addAttribute("account",acd);
+        model.addAttribute("account",dto);
         return new ModelAndView("customer/login",model);
 
         
@@ -85,7 +84,7 @@ public class AccountController {
     {
     	session.setAttribute("accountid", null);
     	model.addAttribute("account",new AccountDTO());
-    	return "customer/login";
+    	return "redirect:/login";
     }
     
     @GetMapping("/dangky")    

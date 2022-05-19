@@ -7,9 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+    <link href="/css/bootstrap2.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/css/font-awesome.css" rel="stylesheet">
 </head>
   <body>
     <main class="container">
@@ -141,7 +140,7 @@
               
                 <div class="card-footer text-muted">
                   
-                  <button class="btn btn-primary"><i class="fas fa-save  "></i>
+                  <button class="btn btn-primary"><i class="fa fa-save  "></i>
                     <span th:if="*{isEdit}">Update</span>
                     <span th:unless="*{isEdit}">Save</span>
                 </button>

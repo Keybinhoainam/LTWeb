@@ -78,7 +78,7 @@
                       <div class="col">
                         <div class="form-group">
                           <b for="description" >Decription</b>
-                          <textarea class="form-control" th:text="*{descrition}" readonly></textarea>
+                          <textarea style="min-height: 400px;" class="form-control" th:text="*{descrition}" readonly></textarea>
                         </div>
                       </div>
                     </div>
@@ -87,8 +87,8 @@
                 </div>
               
                 <div class="card-footer text-muted">
-                  <a th:href="@{'/home' }" class="btn btn-outline-secondary mr-4" ><i class="">Continues Shopping</i></a>
-                  <a th:href="@{'/cart/addtocart/' + *{productId}}" class="btn btn-outline-primary"><i class="fas fa-cart-plus">Add to Cart</i></a>
+                  <a th:href="@{'/customer/home' }" class="btn btn-outline-secondary mr-4" ><i class="">Continues Shopping</i></a>
+                  <a th:href="@{'/customer/cart/addtocart/' + *{productId}}" class="btn btn-outline-primary"><i class="fas fa-cart-plus">Add to Cart</i></a>
                   
                   
                 </div>

@@ -82,6 +82,22 @@ public interface ProductService {
 
 	List<Product> findByCondi(Long x, String y);
 
+	List<Product> findTop3PastaNoodles();
+
+	List<Product> findTop3Oils();
+
+	List<Product> findTop3Nuts();
+
+	List<Product> findByCategory(Long id);
+
+	List<Product> findByFilter(String name, Long category, String status);
+
+	List<Product> findByDiscount();
+
+	List<Product> findByFilter2(String name, Long category);
+
+	List<Product> findByFilter1(String name, String status);
+
 	
 	
 

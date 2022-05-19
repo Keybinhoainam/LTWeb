@@ -21,6 +21,8 @@ public class ProductDTO implements Serializable{
 	private int quantity;
 //	@NotEmpty
 	private double unitPrice;
+	private double primeCost;
+	private double savePrice;
 //	@NotEmpty
 	private String image;
 	private MultipartFile imageFile;
@@ -118,6 +120,18 @@ public class ProductDTO implements Serializable{
 	}
 	public void setIsshow(Boolean isshow) {
 		this.isshow = isshow;
+	}
+	public double getPrimeCost() {
+		return primeCost;
+	}
+	public void setPrimeCost(double primeCost) {
+		this.primeCost = primeCost;
+	}
+	public double getSavePrice() {
+		return savePrice;
+	}
+	public void setSavePrice(double savePrice) {
+		this.savePrice = savePrice;
 	}
 	
 	
